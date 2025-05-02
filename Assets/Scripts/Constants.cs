@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
 
 public class Constants : MonoBehaviour
 {
@@ -13,6 +14,9 @@ public class Constants : MonoBehaviour
     public bool isPaused = false;
     [SerializeField] public GameObject DimPanel;
     [SerializeField] public GameObject ResumeButton;
+    [SerializeField] public GameObject RestartButton;
+    [SerializeField] public GameObject MainMenuButton;
+    [SerializeField] public GameObject ExitToDesktopButtton;
 
     private void Start() {
         bird = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
@@ -30,11 +34,14 @@ public class Constants : MonoBehaviour
 
     public void showPauseMenu() {
         ResumeButton.SetActive(!isPaused);
+        RestartButton.SetActive(!isPaused);
     }
 
     public void PauseGame() {
         isPaused = !isPaused;
         DimPanel.SetActive(isPaused);
+        MainMenuButton.SetActive(isPaused);
+        ExitToDesktopButtton.SetActive(isPaused);
         if (isPaused) {
             WallSpeed = 0f;
             DisableWallSpawn = true;
@@ -49,6 +56,10 @@ public class Constants : MonoBehaviour
             birdScript.disabledJump = false;
             gui_handler.IsPause = false;
         }
+    }
+
+    public void LoadMainMenu() {
+        SceneManager.LoadScene("Menu");
     }
 
 }
