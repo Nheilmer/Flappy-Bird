@@ -8,7 +8,10 @@ public class WallMoveScript : MonoBehaviour
 
     void Update()
     {
-        Vector3 movDir = new Vector2(-1, 0);
-        gameObject.transform.position += movDir * MoveSpeed * Time.deltaTime;
+        gameObject.transform.position += (new Vector3(-1, 0)) * MoveSpeed * Time.deltaTime;
+
+        if (gameObject.transform.position.x < (-9.5f)) {
+            Destroy(gameObject);
+        }
     }
 }

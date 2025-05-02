@@ -12,4 +12,11 @@ public class BirdScript : MonoBehaviour
             gameObject.GetComponent<Rigidbody2D>().velocity = new Vector3(0, FlapStrength, 0);
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Wall")) {
+            Destroy(this.gameObject);
+        }
+    }
 }
