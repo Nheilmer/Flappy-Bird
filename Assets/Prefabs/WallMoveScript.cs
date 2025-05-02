@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class WallMoveScript : MonoBehaviour
 {
-    float MoveSpeed = 2f;
+    private Constants constants;
 
-    void Update()
-    {
-        gameObject.transform.position += (new Vector3(-1, 0)) * MoveSpeed * Time.deltaTime;
+    private void Start() {
+        constants = GameObject.FindGameObjectWithTag("LogicHandler").GetComponent<Constants>();
+    }
+
+    void Update() {
+        gameObject.transform.position += (new Vector3(-1, 0)) * constants.WallSpeed * Time.deltaTime;
 
         if (gameObject.transform.position.x < (-9.5f)) {
             Destroy(gameObject);

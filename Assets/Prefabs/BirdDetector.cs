@@ -7,8 +7,7 @@ public class BirdDetector : MonoBehaviour
 {
     public static Action onCall;
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
+    private void OnTriggerEnter2D(Collider2D collision) {
         onCall?.Invoke();
     }
 }

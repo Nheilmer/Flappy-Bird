@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class ScoreHandler : MonoBehaviour
 {
+    [SerializeField] private TextMeshProUGUI Score_LBL;
     [SerializeField] public int Score = 0;
 
     private void OnEnable() {
@@ -16,6 +18,6 @@ public class ScoreHandler : MonoBehaviour
 
     public void AddScore() {
         Score++;
-        Debug.Log(Score);
+        Score_LBL.text = "Score: " + Score.ToString();
     }
 }

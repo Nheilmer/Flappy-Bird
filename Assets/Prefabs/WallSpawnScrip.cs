@@ -4,22 +4,24 @@ using UnityEngine;
 
 public class WallSpawnScrip : MonoBehaviour
 {
+    private Constants constants;
     [SerializeField] public GameObject WallPrefab;
     [SerializeField] public float Spawnrate = 1.5f;
     private float currSpawnRate = 0;
 
-    private void Start()
-    {
+    private void Start() {
+        constants = GameObject.FindGameObjectWithTag("LogicHandler").GetComponent<Constants>();
         Instantiate (WallPrefab, new Vector2(9.5f, GetRandVal()), Quaternion.identity);
     }
 
-    private void FixedUpdate()
-    {
-        currSpawnRate += Time.deltaTime;
-        if (currSpawnRate > Spawnrate) {
-            float T_D = GetRandVal();
-            Instantiate (WallPrefab, new Vector2(9.5f, T_D), Quaternion.identity);
-            currSpawnRate = 0;
+    private void FixedUpdate() {
+        if (!constants.DisableWallSpawn) {
+            currSpawnRate += Time.deltaTime;
+            if (currSpawnRate > Spawnrate) {
+                float T_D = GetRandVal();
+                Instantiate (WallPrefab, new Vector2(9.5f, T_D), Quaternion.identity);
+                currSpawnRate = 0;
+            }
         }
     }
 
