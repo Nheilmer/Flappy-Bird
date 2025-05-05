@@ -58,10 +58,10 @@ public class SkinSelector : MonoBehaviour
     }
 
     public void SaveBirdPreset() {
-        //string presetData = selectedColor + "\n" + selectedColorIndex;
-        //string filePath = Path.Combine(dataPath, "SavedBirdPreset.txt");
+        string presetData = Colors[selectedColorIndex] + "\n" + selectedColorIndex;
+        string filePath = Path.Combine(dataPath, "SavedBirdPreset.txt");
 
-        //File.WriteAllText(filePath, presetData);
+        File.WriteAllText(filePath, presetData);
         SceneManager.LoadScene("Game");
     }
 

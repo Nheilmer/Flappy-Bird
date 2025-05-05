@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class Constants : MonoBehaviour
 {
@@ -11,17 +12,22 @@ public class Constants : MonoBehaviour
     private GUI_Handler gui_handler;
     public float WallSpeed = 3f;
     public bool DisableWallSpawn = false;
-    public bool isPaused = false;
+    public bool IsPaused = false;
+    public bool StartGame = false;
     [SerializeField] public GameObject DimPanel;
     [SerializeField] public GameObject ResumeButton;
     [SerializeField] public GameObject RestartButton;
     [SerializeField] public GameObject MainMenuButton;
     [SerializeField] public GameObject ExitToDesktopButtton;
 
+    [SerializeField] public TextMeshProUGUI score;
+    [SerializeField] public TextMeshProUGUI time;
+
     private void Start() {
         bird = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
         birdScript = GameObject.FindGameObjectWithTag("Player").GetComponent<BirdScript>();
         gui_handler = GameObject.FindGameObjectWithTag("LogicHandler").GetComponent<GUI_Handler>();
+        initialPause();
     }
     
     private void OnEnable() {
@@ -33,16 +39,33 @@ public class Constants : MonoBehaviour
     }
 
     public void showPauseMenu() {
-        ResumeButton.SetActive(!isPaused);
-        RestartButton.SetActive(!isPaused);
+        ResumeButton.SetActive(!IsPaused);
+        RestartButton.SetActive(!IsPaused);
+    }
+
+    public void initialPause() {
+        if (!StartGame) {
+            WallSpeed = 0f;
+            DisableWallSpawn = true;
+            birdScript.disabledJump = true;
+            bird.velocity = Vector2.zero;
+            bird.gravityScale = 0f;
+            gui_handler.IsPause = true;
+        } else {
+            WallSpeed = 3f;
+            DisableWallSpawn = false;
+            bird.gravityScale = 4f;
+            birdScript.disabledJump = false;
+            gui_handler.IsPause = false;
+        }
     }
 
     public void PauseGame() {
-        isPaused = !isPaused;
-        DimPanel.SetActive(isPaused);
-        MainMenuButton.SetActive(isPaused);
-        ExitToDesktopButtton.SetActive(isPaused);
-        if (isPaused) {
+        IsPaused = !IsPaused;
+        DimPanel.SetActive(IsPaused);
+        MainMenuButton.SetActive(IsPaused);
+        ExitToDesktopButtton.SetActive(IsPaused);
+        if (IsPaused) {
             WallSpeed = 0f;
             DisableWallSpawn = true;
             birdScript.disabledJump = true;
@@ -62,4 +85,7 @@ public class Constants : MonoBehaviour
         SceneManager.LoadScene("Menu");
     }
 
+    public void SaveScore() {
+        ScoreDataHandler.SaveScore(score.text, time.text);
+    }
 }

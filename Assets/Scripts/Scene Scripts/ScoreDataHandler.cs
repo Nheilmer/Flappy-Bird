@@ -1,24 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using TMPro;
 using UnityEngine;
 
 public class ScoreDataHandler : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        string textToSave = "Hello, this is saved text!";
-        string path = Application.persistentDataPath + "/myfile.txt";
+    private static string dataPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments);
+    private static string filePath = Path.Combine(dataPath, "ScoreDatas.txt");
 
-        File.WriteAllText(path, textToSave);
-
-        Debug.Log("File saved to: " + path);
+    public static void SaveScore(string Score, string Time) {
+        string data = Score + "," + Time;
+        File.AppendAllText(filePath, data + "\n");
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public static string[] GetScores() {
+        if (!File.Exists(filePath)) return null;
+        string[] datas = File.ReadAllLines(filePath);
+        return datas;
     }
 }
