@@ -6,8 +6,15 @@ using UnityEngine;
 public class BirdDetector : MonoBehaviour
 {
     public static Action onCall;
+    private Constants constants;
+
+    private void Start()
+    {
+        constants = GameObject.FindGameObjectWithTag("LogicHandler").GetComponent<Constants>();
+    }
 
     private void OnTriggerEnter2D(Collider2D collision) {
         onCall?.Invoke();
+        constants.CheckSurvivalLevel();
     }
 }

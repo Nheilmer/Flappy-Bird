@@ -29,6 +29,7 @@ public class BirdScript : MonoBehaviour
         if(!constants.StartGame) {
             if (Input.GetKeyDown(KeyCode.Space)) {
                 constants.StartGame = true;
+                constants.UpdateSpeed();
                 constants.initialPause();
             }
         }
