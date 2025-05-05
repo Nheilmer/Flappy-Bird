@@ -15,6 +15,8 @@ public class BirdDetector : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision) {
         onCall?.Invoke();
-        constants.CheckSurvivalLevel();
+        if (constants.DEBG_IsSurvival) {
+            constants.CheckSurvivalLevel();
+        }
     }
 }

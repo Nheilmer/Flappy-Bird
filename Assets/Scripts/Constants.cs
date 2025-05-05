@@ -54,14 +54,17 @@ public class Constants : MonoBehaviour
         if (dificultyType.Equals("1")) {
             SelectedSpeed = easy;
             Spawnrate = easyS;
+            DEBG_IsSurvival = false;
         }
         if (dificultyType.Equals("2")) {
             SelectedSpeed = hard;
             Spawnrate = hardS;
+            DEBG_IsSurvival = false;
         }
         if (dificultyType.Equals("3")) {
             SelectedSpeed = DEBG_survival;
             Spawnrate = DEBG_survivalS;
+            DEBG_IsSurvival = true;
         }
     }
     
@@ -71,6 +74,7 @@ public class Constants : MonoBehaviour
     private float DEBG_DificultyLevelCount = 0;
     private float DEBG_DifficultyLimit = 10;
     private float DEBG_CurrentDifficultyCount = 0;
+    public bool DEBG_IsSurvival = false;
 
     public void CheckSurvivalLevel() {
         DEBG_CurrentDifficultyCount++;
