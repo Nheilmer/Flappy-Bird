@@ -38,16 +38,24 @@ public class BirdScript : MonoBehaviour
             onCall?.Invoke();
             constants.PauseGame();
         }
+
+        if (gameObject.transform.position.y > 5.00 || gameObject.transform.position.y < -5.00) {
+            destroyBird();
+        }
+    }
+
+    public void destroyBird() {
+        constants.PauseGame();
+        gui_handler.DisplayPlayAgain();
+        if (constants.StartGame) {
+            constants.SaveScore();
+        }
+        Destroy(this.gameObject);
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {
         if (collision.gameObject.CompareTag("Wall")) {
-            constants.PauseGame();
-            gui_handler.DisplayPlayAgain();
-            if (constants.StartGame) {
-                constants.SaveScore();
-            }
-            Destroy(this.gameObject);
+            destroyBird();
         }
     }
 }
