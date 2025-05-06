@@ -30,4 +30,8 @@ public class Initialize : MonoBehaviour
             }
         }
     }
+
+    public static void CloseSystem() {
+        Application.Quit();
+    }
 }
