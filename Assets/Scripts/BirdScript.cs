@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BirdScript : MonoBehaviour
@@ -20,8 +18,6 @@ public class BirdScript : MonoBehaviour
         string[] preset = SkinSelector.storePresetToArray();
         if (ColorUtility.TryParseHtmlString(preset[0], out BirdColor)) {
             birdSprite.color = BirdColor;
-            Debug.Log("Bird Color : " + preset[0]);
-            Debug.Log("Bird Type  : " + preset[1]);
         }
     }
 

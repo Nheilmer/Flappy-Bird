@@ -40,8 +40,6 @@ public class SkinSelector : MonoBehaviour
         if (ColorUtility.TryParseHtmlString(Colors[selectedColorIndex], out selectedColor)) {
             BirdPrefab.color = selectedColor;
         }
-
-        Debug.Log("Index At: " + selectedColorIndex);
     }
 
     public void SwitchColorLeft() {
@@ -53,13 +51,11 @@ public class SkinSelector : MonoBehaviour
         if (ColorUtility.TryParseHtmlString(Colors[selectedColorIndex], out selectedColor)) {
             BirdPrefab.color = selectedColor;
         }
-
-        Debug.Log("Index At: " + selectedColorIndex);
     }
 
     public void SaveBirdPreset() {
         string presetData = Colors[selectedColorIndex] + "\n" + selectedColorIndex;
-        string filePath = Path.Combine(dataPath, "SavedBirdPreset.txt");
+        string filePath = Path.Combine(dataPath, "FlappyShape/SavedBirdPreset.txt");
 
         File.WriteAllText(filePath, presetData);
         SceneManager.LoadScene("Game");

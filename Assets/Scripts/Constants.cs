@@ -9,7 +9,7 @@ using System.IO;
 public class Constants : MonoBehaviour
 {
     private static string dataPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments);
-    private static string filePath = Path.Combine(dataPath, "DificultyData.txt");
+    private static string filePath = Path.Combine(dataPath, "FlappyShape/DificultyData.txt");
 
     private Rigidbody2D bird;
     private BirdScript birdScript;
@@ -41,7 +41,6 @@ public class Constants : MonoBehaviour
 
     private void Start() {
         UpdateSpeed();
-        Debug.Log("Spawnrate: " + Spawnrate);
         bird = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
         birdScript = GameObject.FindGameObjectWithTag("Player").GetComponent<BirdScript>();
         gui_handler = GameObject.FindGameObjectWithTag("LogicHandler").GetComponent<GUI_Handler>();
@@ -78,7 +77,6 @@ public class Constants : MonoBehaviour
 
     public void CheckSurvivalLevel() {
         DEBG_CurrentDifficultyCount++;
-        Debug.Log("I love Warthunder");
 
         if (DEBG_DificultyLevelCount >= 5) return;
         if (DEBG_CurrentDifficultyCount >= DEBG_DifficultyLimit) {
@@ -142,6 +140,10 @@ public class Constants : MonoBehaviour
             birdScript.disabledJump = false;
             gui_handler.IsPause = false;
         }
+    }
+
+    public void ExitSystem() {
+        Application.Quit();
     }
 
     public void LoadMainMenu() {
