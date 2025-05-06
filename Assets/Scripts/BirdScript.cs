@@ -9,6 +9,7 @@ public class BirdScript : MonoBehaviour
     public Color BirdColor;
     [SerializeField] public float FlapStrength = 5f;
     [SerializeField] public SpriteRenderer birdSprite;
+    private bool UpdateSkin = true;
 
     public static Action onCall;
 
